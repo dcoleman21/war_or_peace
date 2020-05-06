@@ -2,12 +2,12 @@ class Deck
   attr_reader :cards
 
   def initialize(cards)
-    @cards = cards 
+    @cards = cards
   end
 
-  # def rank_of_card_at(0)
-  #   # @
-  # end
+  def rank_of_card_at(index_loc)
+
+  end
   #
   # def percent_high_ranking(n)
   #   #.percents

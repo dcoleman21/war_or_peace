@@ -22,6 +22,16 @@ class DeckTest < Minitest::Test
     deck = Deck.new(cards)
     assert_equal cards, deck.cards
   end
+
+  def test_it_can_find_rank_of_card
+    card1 = Card.new(:diamond, 'Queen', 12)
+    card2 = Card.new(:spade, '3', 3)
+    card3 = Card.new(:heart, 'Ace', 14)
+    cards = [card1, card2, card3]
+    deck = Deck.new(cards)
+
+    assert_equal 12, deck.rank_of_card_at(0)
+  end   
 end
 
 
@@ -29,9 +39,7 @@ end
 
 
 
-# pry(main)> deck.cards
-# #=> [#<Card:0x007fbfd18490e8...>, #<Card:0x007fbfd19f4fa0...>, #<Card:0x007fbfd18555a0...>]
-#
+
 # pry(main)> deck.rank_of_card_at(0)
 # #=> 12
 #
