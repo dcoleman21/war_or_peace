@@ -14,7 +14,7 @@ class Deck
     high_cards = []
     cards.each do |card|
       if card.rank >= 11
-        high_cards << card 
+        high_cards << card
       require "pry"; binding.pry
     end
   end
@@ -31,3 +31,6 @@ class Deck
   #
   # end
 end
+
+
+# working of hotfix for this hotfix branch 
