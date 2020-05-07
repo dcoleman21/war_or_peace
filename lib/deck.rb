@@ -3,7 +3,6 @@ class Deck
 
   def initialize(cards)
     @cards = cards
-
   end
 
   def rank_of_card_at(index)
@@ -18,19 +17,14 @@ class Deck
       require "pry"; binding.pry
     end
   end
-  #
-  # def percent_high_ranking(n)
-  #   #.percents
-  # end
-  #
-  # def remove_card
-  #
-  # end
-  #
-  # def add_card
-  #
-  # end
+
 end
 
+<<<<<<< HEAD
 
 # working of hotfix for this hotfix branch 
+=======
+# working on branch practice
+# this is the deck class
+# continue working on this branch
+>>>>>>> branchprractice
