@@ -14,17 +14,24 @@ class Deck
     cards.each do |card|
       if card.rank >= 11
         high_cards << card
-      require "pry"; binding.pry
+      end
     end
+    high_cards
   end
 
+  def percent_high_ranking
+    total_cards_count = cards.count
+    high_cards_count = high_ranking_cards.count
+    (high_cards_count.to_f / total_cards_count * 100).round(2)
+  end
+
+  def remove_card
+    cards.shift
+  end
+
+  def add_card(card)
+    cards << card
+  end
+
+
 end
-
-<<<<<<< HEAD
-
-# working of hotfix for this hotfix branch 
-=======
-# working on branch practice
-# this is the deck class
-# continue working on this branch
->>>>>>> branchprractice
