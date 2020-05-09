@@ -27,7 +27,6 @@ class TurnTest < Minitest::Test
   end
 
   def test_it_can_read_players
-    skip 
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -42,7 +41,132 @@ class TurnTest < Minitest::Test
     player2 = Player.new("Aurora", deck2)
     turn = Turn.new(player1, player2)
 
-    assert_equal Turn.new(player1, player2),
+    assert_equal player1, turn.player1
+    assert_equal player2, turn.player2
+    assert_equal [], turn.spoils_of_war
+  end
+
+  def test_it_has_a_basic_type
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card3, card4, card6, card7])
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    turn = Turn.new(player1, player2)
+
+    assert_equal :basic, turn.type
+  end
+
+  def test_it_has_a_war_type
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card4, card3, card6, card7])
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    turn = Turn.new(player1, player2)
+
+
+    assert_equal :war, turn.type
+  end
+
+  def test_it_has_a_basic_winner
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card3, card4, card6, card7])
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    turn = Turn.new(player1, player2)
+
+    assert_equal player1, turn.winner
+  end
+
+  def test_it_can_pile_cards_into_spoils_of_war_basic
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card3, card4, card6, card7])
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    turn = Turn.new(player1, player2)
+
+    assert_equal [], turn.spoils_of_war
+    turn.pile_cards
+    assert_equal [card1, card3],turn.spoils_of_war
+    assert_equal [card2, card5, card8], player1.deck.cards
+  end
+
+  def test_it_can_pile_cards_into_spoils_of_war_war
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card4, card3, card6, card7])
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    turn = Turn.new(player1, player2)
+
+    assert_equal :war, turn.type
+    assert_equal player2, turn.winner
+    turn.pile_cards
+    require "pry"; binding.pry
+    assert_equal 6, turn.spoils_of_war.count
+    # assert_equal [], turn.spoils_of_war
+
+    # assert_equal [card5, card6],turn.spoils_of_war
+    # assert_equal [], player1.deck.cards
+  end
+
+  def test_it_can_award_spoils_basic
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card3, card4, card6, card7])
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    turn = Turn.new(player1, player2)
+
+    turn.pile_cards
+    turn.award_spoils(player1)
+    assert_equal player1.deck.cards, [card2, card5, card8, card1, card3]
+    assert_equal player2.deck.cards, [card4, card6, card7]
   end
 end
 
@@ -61,57 +185,7 @@ end
 
 
 
-# #turn type :basic
-# pry(main)> require './lib/card'
-# #=> true
-# pry(main)> require './lib/deck'
-# #=> true
-# pry(main)> require './lib/player'
-# #=> true
-# pry(main)> require './lib/turn'
-# #=> true
-#
-# pry(main)> card1 = Card.new(:heart, 'Jack', 11)
-# #=> #<Card:0x007fa3edaa0df0 @rank=11, @suit=:heart, @value="Jack">
-# pry(main)> card2 = Card.new(:heart, '10', 10)
-# #=> #<Card:0x007fa3eda519a8 @rank=10, @suit=:heart, @value="10">
-# pry(main)> card3 = Card.new(:heart, '9', 9)
-# #=> #<Card:0x007fa3ed98d9b8 @rank=9, @suit=:heart, @value="9">
-# pry(main)> card4 = Card.new(:diamond, 'Jack', 11)
-# #=> #<Card:0x007fa3ee14ef80 @rank=11, @suit=:diamond, @value="Jack">
-# pry(main)> card5 = Card.new(:heart, '8', 8)
-# #=> #<Card:0x007fa3edb263d8 @rank=8, @suit=:heart, @value="8">
-# pry(main)> card6 = Card.new(:diamond, 'Queen', 12)
-# #=> #<Card:0x007fa3eda3e1f0 @rank=12, @suit=:diamond, @value="Queen">
-# pry(main)> card7 = Card.new(:heart, '3', 3)
-# #=> #<Card:0x007fa3edad1cc0 @rank=3, @suit=:heart, @value="3">
-# pry(main)> card8 = Card.new(:diamond, '2', 2)
-# #=> #<Card:0x007fa3eda89308 @rank=2, @suit=:diamond, @value="2">
-#
-# pry(main)> deck1 = Deck.new([card1, card2, card5, card8])
-# #=> #<Deck:0x007fa3eda472c8 @cards=[#<Card:0x007fa3edaa0df0...>, #<Card:0x007fa3eda519a8...>, #<Card:0x007fa3edb263d8...>, #<Card:0x007fa3eda89308...>]>
-#
-# pry(main)> deck2 = Deck.new([card3, card4, card6, card7])
-# #=> #<Deck:0x007fa3ee11ee48 @cards=[#<Card:0x007fa3ed98d9b8...>, #<Card:0x007fa3ee14ef80...>, #<Card:0x007fa3eda3e1f0...>, #<Card:0x007fa3edad1cc0...>]>
-#
-# pry(main)> player1 = Player.new("Megan", deck1)
-# #=> #<Player:0x007fa3edae29d0 @deck=#<Deck:0x007fa3eda472c8...>, @name="Megan">
-#
-# pry(main)> player2 = Player.new("Aurora", deck2)
-# #=> #<Player:0x007fa3ed9e6568 @deck=#<Deck:0x007fa3ee11ee48...>, @name="Aurora">
-#
-# pry(main)> turn = Turn.new(player1, player2)
-# #=> #<Turn:0x007fa3edb25d20 @player1=#<Player:0x007fa3edae29d0..., @name="Megan">, @player2=#<Player:0x007fa3ed9e6568..., @name="Aurora">, @spoils_of_war=[]>
-#
-# pry(main)> turn.player1
-# #=> #<Player:0x007fa3edae29d0 @deck=#<Deck:0x007fa3eda472c8...>, @name="Megan">
-#
-# pry(main)> turn.player2
-# #=> #<Player:0x007fa3ed9e6568 @deck=#<Deck:0x007fa3ee11ee48...>, @name="Aurora">
-#
-# pry(main)> turn.spoils_of_war
-# #=> []
-#
+
 # pry(main)> turn.type
 # #=> :basic
 #
