@@ -5,8 +5,8 @@ class Deck
     @cards = cards
   end
 
-  def rank_of_card_at(index)
-    cards[index].rank
+  def rank_of_card_at(index) #this is passed as argument
+    cards[index].rank   #this is asking for specific index position
   end
 
   def high_ranking_cards
@@ -31,6 +31,7 @@ class Deck
   end
 
   def add_card(card)
-    cards << card
+    # cards << card
+    cards.push(card)
   end
 end

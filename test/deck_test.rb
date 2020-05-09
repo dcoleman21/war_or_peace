@@ -26,7 +26,7 @@ class DeckTest < Minitest::Test
     assert_equal cards, deck.cards
   end
 
-  def test_it_can_find_rank_of_card_at
+  def test_it_can_find_rank_of_card_at_index
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -75,11 +75,14 @@ class DeckTest < Minitest::Test
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
     card4 = Card.new(:club, '5', 5)
+    card5 = Card.new(:diamond, '7', 7)
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
 
     assert_equal 3, deck.cards.count
     deck.add_card(card4)
     assert_equal 4, deck.cards.count
+    deck.add_card(card5)
+    assert_equal 5, deck.cards.count 
   end
 end
