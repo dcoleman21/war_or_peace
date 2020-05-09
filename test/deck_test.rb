@@ -7,7 +7,6 @@ require 'pry'
 class DeckTest < Minitest::Test
 
   def test_it_exists
-
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -18,7 +17,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_can_read_cards
-
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -29,7 +27,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_can_find_rank_of_card_at
-
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -42,7 +39,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_can_find_high_ranking_cards
-
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -53,7 +49,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_can_find_percent_high_ranking
-
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -64,7 +59,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_can_remove_card
-
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -77,7 +71,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_can_add_new_card
-
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)

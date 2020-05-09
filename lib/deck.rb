@@ -20,10 +20,11 @@ class Deck
   end
 
   def percent_high_ranking
-    total_cards_count = cards.count
+    total_card_count = cards.count
     high_cards_count = high_ranking_cards.count
-    (high_cards_count.to_f / total_cards_count * 100).round(2)
+    (high_cards_count.to_f / total_card_count * 100).round(2)
   end
+
 
   def remove_card
     cards.shift
@@ -32,6 +33,4 @@ class Deck
   def add_card(card)
     cards << card
   end
-
-
 end
