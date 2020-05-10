@@ -32,6 +32,6 @@ class Deck
 
   def add_card(card)
     # cards << card
-    cards.push(card)
+    cards.concat(card)
   end
 end
