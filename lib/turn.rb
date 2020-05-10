@@ -24,10 +24,13 @@ class Turn
   end
 
   def pile_cards
-    spoils_of_war << player1.deck.cards.shift
-    spoils_of_war << player2.deck.cards.shift 
-
+    @spoils_of_war << player1.deck.cards.shift
+    @spoils_of_war << player2.deck.cards.shift
   end
 
-
+  def award_spoils(winner)
+    # add cards in @spoils_of_war to winner of turn
+    winner.deck.add_card(spoils_of_war)
+    @spoils_of_war = []
+  end
 end
