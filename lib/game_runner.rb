@@ -75,17 +75,15 @@ Type 'GO' to start the game!"
       1000000.times do
         turn = Turn.new(player1, player2)
         turn.pile_cards
-        if turn.type == :basic
-          turn.spoils_of_war
-          require "pry"; binding.pry
+        if turn.type == :basic # when played, not reading this as a :basic turn. Need to check type in turn class
+          turn.spoils_of_war.count
           turn.award_spoils(turn.winner)
           puts "#{turn_count} #{winner.name} won 2 cards"
         elsif turn.type == :war
           turn.spoils_of_war
           turn.award_spoils(turn.winner)
           puts "#{turn_count} #{winner.name} won 6 cards"
-        elsif turn.type == :mutually_assured_destruction
-          require "pry"; binding.pry
+        elsif turn.type == :mutually_assured_destruction # Is not liking the string "No Winner". Need to figure out winner method in turn class 
           turn.spoils_of_war = []
           puts "#{turn_count} *mutually assured destruction* 6 cards removed from play"
         end
